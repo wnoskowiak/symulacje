@@ -1,7 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
-
 class Euler():
 
     def __init__(self, m, init_pos, init_momentum, parent):
@@ -13,17 +10,19 @@ class Euler():
     def get_v(self):
         return self.momentum/self.m
 
-    def new_r(self):
-        element_1 = np.multiply(self.get_v(), self.parent.dt)
-        element_2 = (np.multiply((self.parent.F(self)/self.m),(self.parent.dt*self.parent.dt)))/2
+    def new_r(self, f, v):
+        element_1 = v*self.parent.dt
+        element_2 = (f*self.parent.dt*self.parent.dt/(self.m*2))
         return self.pos + element_1 + element_2
 
-    def new_momentum(self):
-        return self.momentum + np.multiply(self.parent.F(self), self.parent.dt)
+    def new_momentum(self, f):
+        return self.momentum + f*self.parent.dt
 
     def step(self):
-        pos = self.new_r()
-        mom = self.new_momentum()
+        force = self.parent.F(self)
+        speed = self.get_v()
+        pos = self.new_r(force, speed)
+        mom = self.new_momentum(force)
         self.pos = pos
         self.momentum = mom
         return self.pos, self.momentum
@@ -52,32 +51,14 @@ class Simulation_euler():
         return np.multiply(((-self.G*obj1.m*obj2.m)/(r_length*r_length)),r_ver)
 
     def F(self, object):
-        force = [
-            self.force_element(element, object)
-            for element in self.bodies
-            if element != object
-        ]
-        print(force, object.m)
-        return np.sum(force)
+        force = np.zeros(len(self.bodies[0].pos))
+        for element in self.bodies:
+            if element != object:
+                force = force+self.force_element(element, object)
+        #print(force, object.m)
+        return force
 
     def step(self):
         self.time = self.time + self.dt
         for body in self.bodies:
             body.step()
-        
-
-a = Simulation_euler(0.01,0.001,[{'m':0.1, 'init_pos':np.array([2,0]), 'init_momentum':np.array([0,0.1])}, {'m':500, 'init_pos':np.array([0,0]), 'init_momentum':np.array([0,0])}])
-print(a)
-body_1x = []
-body_1y = []
-body_2x = []
-body_2y = []
-for _ in range(3):
-    a.step()
-    body_1x.append(a.bodies[0].pos[0])
-    body_1y.append(a.bodies[0].pos[1])
-    body_2x.append(a.bodies[1].pos[0])
-    body_2y.append(a.bodies[1].pos[1])
-plt.plot(body_1x, body_1y)
-plt.plot(body_2x, body_2y)
-plt.show()
