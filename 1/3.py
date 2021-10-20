@@ -9,7 +9,7 @@ def gauss(x,t,D):
 D=2
 t=100
 N=100000
-bins = 100
+bins = 50
   
 brownian_motions=np.sqrt(2*D)*get_brown.get_brownian_motion(t,N)
 trajectories=np.cumsum(brownian_motions,axis=0)
