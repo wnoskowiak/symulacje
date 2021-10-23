@@ -29,7 +29,6 @@ class Euler():
 
 class Simulation_euler():
 
-
     def __init__(self, G, dt, param_list):
         self.G = G
         self.dt = dt
@@ -140,7 +139,6 @@ class Frog():
         self.half_speed = new_speed
         self.pos = new_pos
         return self.pos
-
 
 class Simulation_frog():
 
