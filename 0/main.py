@@ -6,6 +6,7 @@ x = np.arange(0,10,0.001)
 y1 = np.sin(x)
 y2 = np.cos(x)
 
+#dupa
 
 plt.plot(x,y1, color='r', linestyle=':')
 plt.plot(x,y2, color='g', linestyle='-')
