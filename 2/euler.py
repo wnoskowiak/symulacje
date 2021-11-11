@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from calkowanie import Simulation_euler
 
-
+#dupa
 a = Simulation_euler(0.01,0.001,[{'m':0.1, 'init_pos':np.array([2,0]), 'init_momentum':np.array([0,0.1])}, {'m':500, 'init_pos':np.array([0,0]), 'init_momentum':np.array([0,0])}])
 print(a)
 body_1x = []
