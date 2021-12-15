@@ -29,8 +29,7 @@ def DLA(L):
     L2=L//2
     lattice[L2][L2]=1
     l=0
-    i=0
-    for _ in range(1000):
+    for i, _ in enumerate(range(1000)):
         x,y=nowaczastka(L2,L2,l+3)
         #print("olaboga")
         while True:
@@ -63,7 +62,6 @@ def DLA(L):
                     x,y=xp,yp
         if(i%10==0):
             lattices.append(lattice.copy())
-        i+=1
     return lattices
     
 print("a")

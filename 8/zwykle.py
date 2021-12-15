@@ -21,8 +21,7 @@ def DLA(L):
     L2=L//2
     lattice[L2][L2]=1
     l=0
-    i=0
-    for _ in range(500):
+    for i, _ in enumerate(range(500)):
         x,y=nowaczastka(L2,L2,l+75)
         while True:
             if (sprawdz(lattice,x,y)>=1):
@@ -42,7 +41,6 @@ def DLA(L):
                 x,y=xp,yp
         if(i%100==0):
             lattices.append(lattice.copy())
-        i+=1
     return lattices
     
 lattices=DLA(200)
