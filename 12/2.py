@@ -10,7 +10,7 @@ iter = 3000
 sizes = []
 
 for i in range(iter):
-    nx, ny = randint(0,n-1), randint(0,n-1)
+    nx, ny = n//2, n//2
     lat[nx][ny] += 1
     if lat[nx][ny] == 4:
         que.put((nx, ny))
@@ -28,11 +28,8 @@ for i in range(iter):
                 lat[lx][ly] += 1
         except:
             pass
-            #print(lx,ly)
-    
+    if i%100 == 0 :
+        plt.imshow(lat,interpolation='nearest')
+        plt.savefig(str(i))
 
-#print(lat)
-plt.plot(sizes)
-plt.show()
-plt.imshow(lat,interpolation='nearest')
-plt.show()
+    
